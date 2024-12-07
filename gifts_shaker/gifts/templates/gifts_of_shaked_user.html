@@ -1,0 +1,38 @@
+{% extends "home.html" %}
+{% load url_target_blank %}
+
+
+
+{% block content %}
+
+
+<div class="row" style="padding-left:2%; padding-right:20%">
+	<div class="col-md">
+			<table class="table table-striped">
+ 			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th>{{ shaked_user.first_name }}{{ shaked_user.last_name }}</th>
+					<th>Nazwa</th>
+					<th>Cena</th>
+					<th>Link</th>
+				</tr>
+  			</thead>
+	  <tbody>
+				{% for gift in gifts %}
+				<tr>
+					<th scope="row"></th>
+					<td>{{gift}}</td>
+					<td>{{gift.name}}</td>
+					<td>{{gift.price}}</td>
+					<td>{{gift.link|urlizetrunc:15|url_target_blank}}</td>
+				</tr>
+				{% endfor %}
+  </tbody>
+
+			</table>
+		</div>
+</div>
+
+
+{% endblock %}

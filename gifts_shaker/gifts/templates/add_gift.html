@@ -1,0 +1,66 @@
+{% extends "home.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+
+  <form class="needs-validation" method="POST" novalidate>
+    {% csrf_token %}
+      <div class="form-row">
+          <div class="col-md-4 mb-3">
+              <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                {% render_field form.name class="form-control" placeholder=form.name.label %}
+              <div class="invalid-feedback">
+                  Wpisz nazwę prezentu.
+              </div>
+          </div>
+          <div class="col-md-4 mb-3">
+                <label for="{{ form.price.id_for_label }}">{{ form.price.label }}</label>
+                {% render_field form.price class="form-control" placeholder=form.price.label %}
+                <div class="invalid-feedback">
+                    Wpisz poprawną kwotę.
+                </div>
+          </div>
+      </div>
+      <div class="form-row">
+          <div class="col-md-6 mb-3">
+              <label for="{{ form.link.id_for_label }}">{{ form.link.label }}</label>
+              {% render_field form.link class="form-control" placeholder=form.link.label %}
+              <div class="invalid-feedback">
+                  Wpisz link zaczynając od http://www. albo https://www.
+              </div>
+          </div>
+      </div>
+
+   <div class="form-group">
+      <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-ok"></span> Zapisz
+      </button>
+    </div>
+  </form>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+
+{% endblock %}
+

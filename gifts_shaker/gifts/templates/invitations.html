@@ -1,0 +1,40 @@
+{% extends "home.html" %}
+{% load url_target_blank %}
+
+
+
+{% block content %}
+
+
+<div class="row" style="padding-left:2%; padding-right:20%">
+	<div class="col-md">
+			<table class="table table-striped">
+ 			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th>Email</th>
+					<th>Czy się zarejestrował</th>
+					<th colspan="2"><a class="btn btn-sm btn-info" href="/gifts/invite">Zaproś nową osobę</a></th>
+
+				</tr>
+  			</thead>
+	  <tbody>
+
+				{% for invite in invitations %}
+
+				<tr>
+					<th scope="row"></th>
+					<td>{{invite.email}}</td>
+					<td>{{invite.accepted}}</td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'delete_invitation' invite.id %}">Delete</a></td>
+				</tr>
+				{% endfor %}
+  </tbody>
+
+			</table>
+		</div>
+</div>
+
+
+{% endblock %}
+

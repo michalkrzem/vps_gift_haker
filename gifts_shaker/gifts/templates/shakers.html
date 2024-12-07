@@ -1,0 +1,56 @@
+{% extends "home.html" %}
+{% load url_target_blank %}
+
+
+
+{% block content %}
+
+
+<div class="row" style="padding-left:2%; padding-right:20%">
+	<div class="col-md">
+			<table class="table table-striped">
+ 			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th>Nazwa Shakera</th>
+					<th colspan="2"><a class="btn btn-sm btn-info" href="/gifts/new_shaker">Stwórz nowy shaker</a></th>
+				</tr>
+  			</thead>
+	  <tbody>
+				{% for shaker in shakers %}
+
+				<tr>
+					<th scope="row"></th>
+					<td>{{shaker.shaker_name}}</td>
+					{% if shaker.owner == request.user.id %}
+						<td><a class="btn btn-sm btn-info" href="{% url 'add_person' shaker.id %}">Dodaj osoby</a></td>
+					{% else %}
+						<td></td>
+					{% endif %}
+
+					{% if shaker.owner == request.user.id %}
+						<td><a class="btn btn-sm btn-info" href="{% url 'shake' shaker.id %}">Zamieszaj</a></td>
+					{% else %}
+						<td></td>
+					{% endif %}
+
+					<td><a class="btn btn-sm btn-info" href="{% url 'gifts_of_shaked_users' shaker.id %}">Podgląd prezentów wylosowanej tu osoby</a></td>
+
+					{% if shaker.owner == request.user.id %}
+						<form method="post" action="{% url 'delete_shaker' shaker.id %}">
+    						{% csrf_token %}
+							<td ><button type="submit" class="btn btn-sm btn-danger">Delete</button></td>
+						</form>
+					{% else %}
+						<td></td>
+					{% endif %}
+				</tr>
+				{% endfor %}
+  </tbody>
+
+			</table>
+		</div>
+</div>
+
+
+{% endblock %}
