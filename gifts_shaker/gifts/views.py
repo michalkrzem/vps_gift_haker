@@ -96,7 +96,7 @@ def create_invitation(request):
             try:
                 send_mail(
                     subject="Giftshaker Invitation",
-                    message="Zapraszam na stronę rejestracji http://127.0.0.1:8080/login/register/",
+                    message="Zapraszam na stronę rejestracji http://91.228.196.132:8000/login/register/",
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=request.POST.getlist("email"),
                 )
